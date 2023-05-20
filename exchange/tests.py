@@ -61,7 +61,7 @@ def test_bank_gov_rate():
     assert e.pair.sell == 36.5686
 
 
-def test_currency_rate():
+def test_vkurse_rate():
     mocked_response = json.load(open(root / "fixtures/vkurse_response.json"))
     responses.get(
         "https://vkurse.dp.ua/course.json",

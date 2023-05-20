@@ -1,0 +1,10 @@
+<form method="POST" action="{% url 'index' %}">
+    {% csrf_token %}
+    <h1>Розрахунок валюти за найкращим курсом</h1>
+    {{ form.as_p }}
+        <button type="submit" name="USD-UAH">USD-UAH</button>
+		<button type="submit" name="EUR-UAH">EUR-UAH</button>
+        <button type="submit" name="UAH-USD">UAH-USD</button>
+		<button type="submit" name="UAH-EUR">UAH-EUR</button>
+
+</form>

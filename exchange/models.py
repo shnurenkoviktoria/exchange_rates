@@ -1,10 +1,12 @@
 from django.db import models
+from django.utils import timezone
+
 
 # Create your models here.
 
 
 class Rate(models.Model):
-    date = models.DateField()
+    date = models.DateField(default=timezone.now, null=False)
     vendor = models.CharField(max_length=255)
     currency_a = models.CharField(max_length=3)
     currency_b = models.CharField(max_length=3)

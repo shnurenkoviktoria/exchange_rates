@@ -1,15 +1,15 @@
 import datetime
 
-from .models import Rate
+from celery import shared_task
+
 from .exchange_provider import (
     MonoExchange,
     PrivatExchange,
     MinfinExchange,
     BankGovExchange,
-    CurrencyExchange,
+    VkurseExchange,
 )
-
-from celery import shared_task
+from .models import Rate
 
 
 @shared_task
@@ -32,8 +32,8 @@ def start_exchange(vendor, currency_a, currency_b):
         exchange = MinfinExchange(vendor, currency_a, currency_b)
     elif vendor == "bank_gov":
         exchange = BankGovExchange(vendor, currency_a, currency_b)
-    elif vendor == "currency":
-        exchange = CurrencyExchange(vendor, currency_a, currency_b)
+    elif vendor == "vkurse":
+        exchange = VkurseExchange(vendor, currency_a, currency_b)
     exchange.get_rate()
     Rate.objects.get_or_create(
         date=current_date,

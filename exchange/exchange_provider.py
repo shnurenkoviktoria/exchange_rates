@@ -10,9 +10,7 @@ class ExchangeCodes(enum.Enum):
     EUR = 978
     UAH = 980
 
-class ExchangeCodes2(enum.Enum):
-    USD = "Dollar"
-    EUR = "Euro"
+
 @dataclasses.dataclass(frozen=True)
 class SellBuy:
     sell: float
@@ -84,21 +82,16 @@ class BankGovExchange(ExchangeBase):
 
 
 class VkurseExchange(ExchangeBase):
-
     def get_rate(self):
-
         r = requests.get("https://vkurse.dp.ua/course.json").json()
 
         for rate in r:
-            if rate=="Dollar":
-                self.currency_a="USD"
-                d_buy =float(r["Dollar"]["buy"])
-                d_sale=float(r["Dollar"]["sale"])
+            if rate == "Dollar" and self.currency_a == "USD":
+                d_buy = float(r["Dollar"]["buy"])
+                d_sale = float(r["Dollar"]["sale"])
                 self.pair = SellBuy(d_buy, d_sale)
-            elif rate=="Euro":
-                self.currency_a = "EUR"
-                e_buy = float(r["Dollar"]["buy"])
-                e_sale = float(r["Dollar"]["sale"])
+
+            elif rate == "Euro" and self.currency_a == "EUR":
+                e_buy = float(r["Euro"]["buy"])
+                e_sale = float(r["Euro"]["sale"])
                 self.pair = SellBuy(e_buy, e_sale)
-
-
