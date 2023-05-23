@@ -2,4 +2,4 @@ from django import forms
 
 
 class CalculationForm(forms.Form):
-    num = forms.FloatField(min_value=0)
+    num = forms.FloatField(label="", min_value=0)
