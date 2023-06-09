@@ -17,9 +17,6 @@ class DecimalAsFloatJSONEncoder(DjangoJSONEncoder):
         return super().default(o)
 
 
-# Create your views here.
-
-
 def index(request):
     if request.method == "POST":
         if "USD-UAH" in request.POST:
